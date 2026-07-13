@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grab Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-logo">G</div>
+            <div>
+                <h1>Grab System</h1>
+                <p>Quản lý khách hàng, tài xế và chuyến đi</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <section class="metrics">
+            <article class="metric-card">
+                <span class="metric-label">Khách hàng</span>
+                <strong th:text="${totalKhachHang}">0</strong>
+            </article>
+            <article class="metric-card">
+                <span class="metric-label">Chuyến đi</span>
+                <strong th:text="${totalChuyenDi}">0</strong>
+            </article>
+            <article class="metric-card">
+                <span class="metric-label">Tài xế</span>
+                <strong th:text="${totalTaiXe}">0</strong>
+            </article>
+            <article class="metric-card">
+                <span class="metric-label">Xe</span>
+                <strong th:text="${totalXe}">0</strong>
+            </article>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Danh sách khách hàng</h2>
+                    <p>Hiển thị đầy đủ database khách hàng hiện tại.</p>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã KH</th>
+                            <th>Họ tên</th>
+                            <th>Điện thoại</th>
+                            <th>Email</th>
+                            <th>Ngày đăng ký</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="kh : ${khachHangs}">
+                            <td th:text="${kh.maKH}">1</td>
+                            <td th:text="${kh.hoTen}">Nguyen Van A</td>
+                            <td th:text="${kh.soDienThoai}">0123456789</td>
+                            <td th:text="${kh.email}">user@example.com</td>
+                            <td th:text="${#dates.format(kh.ngayDangKy, 'dd/MM/yyyy')}">01/01/2024</td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(khachHangs)}">
+                            <td colspan="5" class="empty-state">Chưa có khách hàng nào trong hệ thống.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="row-panels">
+            <div class="panel small-panel">
+                <h3>Chuyến đi gần nhất</h3>
+                <div th:if="${#lists.isEmpty(chuyenDis)}" class="empty-state">Chưa có chuyến đi nào.</div>
+                <div th:each="cd : ${chuyenDis}" class="small-item">
+                    <strong th:text="${cd.diemDon} + ' → ' + ${cd.diemDen}">Điểm A → Điểm B</strong>
+                    <span th:text="${cd.trangThai}">Đang xử lý</span>
+                </div>
+            </div>
+            <div class="panel small-panel">
+                <h3>Danh sách tài xế</h3>
+                <div th:if="${#lists.isEmpty(taiXes)}" class="empty-state">Chưa có tài xế nào.</div>
+                <div th:each="tx : ${taiXes}" class="small-item">
+                    <strong th:text="${tx.hoTen}">Nguyen Van B</strong>
+                    <span th:text="${tx.trangThai}">Sẵn sàng</span>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

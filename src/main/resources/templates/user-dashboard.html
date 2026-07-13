@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<main class="page-container">
+    <section class="panel" style="max-width:960px;margin:28px auto;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h2>Xin chào <span th:text="${user.hoTen}">User</span></h2>
+            <a href="/logout">Đăng xuất</a>
+        </div>
+
+        <h3>Đặt xe / Giao hàng</h3>
+        <form method="post" action="/user/dat-xe" style="display:flex;gap:8px;flex-wrap:wrap;">
+            <input name="diemDon" placeholder="Điểm đón" required />
+            <input name="diemDen" placeholder="Điểm đến" required />
+            <input name="giaTien" placeholder="Giá tiền" required />
+            <button type="submit">Đặt</button>
+        </form>
+
+        <h3 style="margin-top:18px;">Lịch sử chuyến đi</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr><th>Mã</th><th>Đón</th><th>Đến</th><th>Giá</th><th>Thời gian</th><th>Trạng thái</th></tr>
+                </thead>
+                <tbody>
+                <tr th:each="h : ${history}">
+                    <td th:text="${h.maChuyen}">1</td>
+                    <td th:text="${h.diemDon}">A</td>
+                    <td th:text="${h.diemDen}">B</td>
+                    <td th:text="${h.giaTien}">0</td>
+                    <td th:text="${#dates.format(h.thoiGianDat, 'dd/MM/yyyy HH:mm')}">--</td>
+                    <td th:text="${h.trangThai}">--</td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(history)}"><td colspan="6" class="empty-state">Chưa có chuyến đi.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

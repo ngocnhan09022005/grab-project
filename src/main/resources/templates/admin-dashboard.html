@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<main class="page-container">
+    <section class="panel" style="max-width:1100px;margin:28px auto;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h2>Admin - Quản lý</h2>
+            <a href="/">Về trang chủ</a>
+        </div>
+
+        <h3>Toàn bộ chuyến đi</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr><th>Mã</th><th>KH</th><th>TX</th><th>Đón</th><th>Đến</th><th>Giờ</th><th>Giá</th><th>Trạng thái</th></tr>
+                </thead>
+                <tbody>
+                <tr th:each="c : ${chuyenDis}">
+                    <td th:text="${c.maChuyen}">1</td>
+                    <td th:text="${c.khachHang != null ? c.khachHang.hoTen : 'N/A'}">KH</td>
+                    <td th:text="${c.taiXe != null ? c.taiXe.hoTen : 'N/A'}">TX</td>
+                    <td th:text="${c.diemDon}">A</td>
+                    <td th:text="${c.diemDen}">B</td>
+                    <td th:text="${#dates.format(c.thoiGianDat, 'dd/MM/yyyy HH:mm')}">--</td>
+                    <td th:text="${c.giaTien}">0</td>
+                    <td th:text="${c.trangThai}">--</td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(chuyenDis)}"><td colspan="8" class="empty-state">Chưa có chuyến đi.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

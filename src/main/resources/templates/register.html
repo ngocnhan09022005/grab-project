@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<main class="page-container">
+    <section class="panel" style="max-width:560px;margin:48px auto;">
+        <h2>Đăng ký tài khoản</h2>
+        <form method="post" action="/register">
+            <label> Họ tên<br/><input name="hoTen" required/></label><br/>
+            <label> Số điện thoại<br/><input name="soDienThoai" required/></label><br/>
+            <label> Email<br/><input name="email" type="email" required/></label><br/>
+            <div style="margin-top:12px;">
+                <button type="submit">Đăng ký</button>
+                <a href="/login" style="margin-left:12px;">Đăng nhập</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
