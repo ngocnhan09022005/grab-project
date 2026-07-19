@@ -27,7 +27,7 @@
                     <td th:text="${c.taiXe != null ? c.taiXe.hoTen : 'N/A'}">TX</td>
                     <td th:text="${c.diemDon}">A</td>
                     <td th:text="${c.diemDen}">B</td>
-                    <td th:text="${#dates.format(c.thoiGianDat, 'dd/MM/yyyy HH:mm')}">--</td>
+                    <td th:text="${c.thoiGianDat != null ? #temporals.format(c.thoiGianDat, 'dd/MM/yyyy HH:mm') : '--'}">--</td>
                     <td th:text="${c.giaTien}">0</td>
                     <td th:text="${c.trangThai}">--</td>
                 </tr>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết chuyến đi</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<main class="page-container">
+    <section class="panel" style="max-width:900px;margin:28px auto;">
+        <div class="panel-header">
+            <div>
+                <h2>Chuyến đi #<span th:text="${trip.maChuyen}">1</span></h2>
+                <p th:text="${'Từ ' + trip.diemDon + ' đến ' + trip.diemDen}">Điểm đón - điểm đến</p>
+            </div>
+            <a class="text-link" th:href="@{/user/dashboard}">Quay lại</a>
+        </div>
+
+        <div class="booking-card">
+            <div class="form-grid">
+                <div class="field-group">
+                    <label>Điểm đón</label>
+                    <div class="helper-text" th:text="${trip.diemDon}">--</div>
+                </div>
+                <div class="field-group">
+                    <label>Điểm đến</label>
+                    <div class="helper-text" th:text="${trip.diemDen}">--</div>
+                </div>
+                <div class="field-group">
+                    <label>Giá tiền</label>
+                    <div class="helper-text" th:text="${trip.giaTien}">0</div>
+                </div>
+                <div class="field-group">
+                    <label>Trạng thái</label>
+                    <div class="helper-text" th:text="${trip.trangThai}">--</div>
+                </div>
+                <div class="field-group">
+                    <label>Tài xế</label>
+                    <div class="helper-text" th:text="${trip.taiXe != null ? trip.taiXe.hoTen : 'Đang chờ'}">--</div>
+                </div>
+                <div class="field-group">
+                    <label>Thanh toán</label>
+                    <div class="helper-text" th:text="${trip.daThanhToan != null && trip.daThanhToan ? 'Đã thanh toán' : 'Chưa thanh toán'}">--</div>
+                </div>
+            </div>
+
+            <div th:if="${success}" class="feedback success" th:text="${success}"></div>
+            <div th:if="${error}" class="feedback error" th:text="${error}"></div>
+
+            <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+                <form method="post" th:action="@{/user/chuyen-di/{id}/hoan-thanh(id=${trip.maChuyen})}" style="min-width:260px; flex:1;">
+                    <div class="field-group">
+                        <label for="phuongThucThanhToan">Phương thức thanh toán</label>
+                        <select class="form-input" id="phuongThucThanhToan" name="phuongThucThanhToan" required>
+                            <option value="Tien mat">Tiền mặt</option>
+                            <option value="Chuyen khoan">Chuyển khoản</option>
+                        </select>
+                    </div>
+                    <button class="auth-btn" type="submit">Xác nhận đã hoàn thành & thanh toán</button>
+                </form>
+                <form method="post" th:action="@{/user/chuyen-di/{id}/huy(id=${trip.maChuyen})}" style="min-width:180px; display:flex; align-items:flex-end;">
+                    <button class="auth-btn secondary" type="submit">Hủy chuyến</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

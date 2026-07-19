@@ -7,41 +7,151 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-<main class="page-container">
-    <section class="panel" style="max-width:960px;margin:28px auto;">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-            <h2>Xin chào <span th:text="${user.hoTen}">User</span></h2>
-            <a href="/logout">Đăng xuất</a>
+<main class="page-container user-page">
+    <section class="panel user-panel">
+        <div class="panel-header user-header">
+            <div>
+                <p class="eyebrow">Bảng điều khiển người dùng</p>
+                <h2>Xin chào <span th:text="${user.hoTen}">User</span></h2>
+                <p>Đặt chuyến, theo dõi lịch sử và kiểm tra tình huống giao dịch một cách nhanh chóng.</p>
+            </div>
+            <a class="auth-btn secondary logout-btn" href="/logout">Đăng xuất</a>
         </div>
 
-        <h3>Đặt xe / Giao hàng</h3>
-        <form method="post" action="/user/dat-xe" style="display:flex;gap:8px;flex-wrap:wrap;">
-            <input name="diemDon" placeholder="Điểm đón" required />
-            <input name="diemDen" placeholder="Điểm đến" required />
-            <input name="giaTien" placeholder="Giá tiền" required />
-            <button type="submit">Đặt</button>
-        </form>
+        <div class="grid-two">
+            <div class="booking-panel">
+                <div class="section-title">
+                    <h3>Đặt xe / Giao hàng</h3>
+                    <p>Chọn lộ trình và tài xế, hệ thống sẽ xử lý giao dịch an toàn và tự động.</p>
+                </div>
+                <form class="booking-card" method="post" th:action="@{/user/dat-xe}">
+                    <div class="form-grid">
+                        <div class="field-group">
+                            <label for="diemDon">Điểm đón</label>
+                            <input class="form-input" id="diemDon" name="diemDon" placeholder="123 Nguyễn Trãi" th:value="${diemDon}" required />
+                        </div>
+                        <div class="field-group">
+                            <label for="diemDen">Điểm đến</label>
+                            <input class="form-input" id="diemDen" name="diemDen" placeholder="456 Lê Lợi" th:value="${diemDen}" required />
+                        </div>
+                        <div class="field-group">
+                            <label for="soKm">Số km</label>
+                            <input class="form-input" id="soKm" name="soKm" type="number" min="1" step="1" th:value="${soKm != null ? soKm : 1}" required />
+                        </div>
+                        <div class="field-group">
+                            <label for="maTX">Mã tài xế</label>
+                            <select class="form-input" id="maTX" name="maTX" required>
+                                <option value="" disabled th:if="${selectedDriverId == null}" selected>Chọn tài xế đang online</option>
+                                <option th:each="driver : ${availableDrivers}"
+                                        th:value="${driver.maTX}"
+                                        th:selected="${driver.maTX == selectedDriverId}"
+                                        th:text="${driver.maTX + ' - ' + driver.hoTen + ' (' + driver.trangThai + ')'}">
+                                </option>
+                            </select>
+                            <small class="helper-text">Chỉ hiển thị tài xế đang online và sẵn sàng.</small>
+                        </div>
+                    </div>
+                    <div class="price-summary">
+                        <p>Tổng giá: <strong id="calculatedPrice">4.500</strong> VND</p>
+                    </div>
+                    <div class="form-actions service-buttons">
+                        <input type="hidden" name="serviceType" th:value="${serviceType}" />
+                        <button class="auth-btn" type="submit" name="serviceType" value="TAXI">Đặt xe</button>
+                        <button class="auth-btn secondary" type="submit" name="serviceType" value="DELIVERY">Giao hàng</button>
+                    </div>
+                    <div class="button-note">Giá được tính tự động theo km: 4.500 VND/km.</div>
+                    <div th:if="${error}" class="feedback error" th:text="${error}"></div>
+                    <div th:if="${driverBusy}" class="feedback info">
+                        <p>Đã chọn tài xế đang bận. Bạn có thể:</p>
+                        <ul>
+                            <li><button type="submit" class="auth-btn" style="padding:6px 16px;">Đợi tài xế</button></li>
+                            <li><button type="button" class="auth-btn secondary" onclick="document.getElementById('maTX').selectedIndex=0; document.getElementById('maTX').focus();">Chọn tài xế khác</button></li>
+                        </ul>
+                    </div>
+                    <div th:if="${success}" class="feedback success" th:text="${success}"></div>
+                    <div th:if="${serviceType}" class="feedback info">Loại dịch vụ: <span th:text="${serviceType}">TAXI</span></div>
+                    <div th:if="${distanceKm}" class="feedback info">Quãng đường: <span th:text="${distanceKm}">1</span> km</div>
+                </form>
+            </div>
 
-        <h3 style="margin-top:18px;">Lịch sử chuyến đi</h3>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                <tr><th>Mã</th><th>Đón</th><th>Đến</th><th>Giá</th><th>Thời gian</th><th>Trạng thái</th></tr>
-                </thead>
-                <tbody>
-                <tr th:each="h : ${history}">
-                    <td th:text="${h.maChuyen}">1</td>
-                    <td th:text="${h.diemDon}">A</td>
-                    <td th:text="${h.diemDen}">B</td>
-                    <td th:text="${h.giaTien}">0</td>
-                    <td th:text="${#dates.format(h.thoiGianDat, 'dd/MM/yyyy HH:mm')}">--</td>
-                    <td th:text="${h.trangThai}">--</td>
-                </tr>
-                <tr th:if="${#lists.isEmpty(history)}"><td colspan="6" class="empty-state">Chưa có chuyến đi.</td></tr>
-                </tbody>
-            </table>
+            <aside class="info-panel">
+                <div class="status-card">
+                    <h4>Trạng thái nhanh</h4>
+                    <p>Kiểm tra hành vi xử lý giao dịch và các tình huống quan trọng ngay tại đây.</p>
+                    <ul class="status-list">
+                        <li>Hệ thống tự động rollback khi phát hiện lỗi.</li>
+                        <li>Deadlock được phát hiện và xử lý bằng InnoDB.</li>
+                        <li>Dữ liệu khách hàng và tài xế luôn được bảo toàn.</li>
+                    </ul>
+                </div>
+                <div class="scenario-section compact-scenarios">
+                    <h4>Tình huống giao dịch</h4>
+                    <div class="scenario-grid">
+                        <div class="scenario-card">
+                            <h5>Customer Not Found</h5>
+                            <p>Nếu khách không tồn tại trong KHACH_HANG, giao dịch sẽ bị hủy.</p>
+                        </div>
+                        <div class="scenario-card">
+                            <h5>Driver Not Found</h5>
+                            <p>Nếu mã tài xế không hợp lệ, chuyến sẽ không được tạo.</p>
+                        </div>
+                        <div class="scenario-card">
+                            <h5>Deadlock</h5>
+                            <p>Deadlock được phát hiện và một bên sẽ rollback tự động.</p>
+                        </div>
+                        <div class="scenario-card">
+                            <h5>Payment Failure</h5>
+                            <p>Thanh toán lỗi sẽ khiến toàn bộ giao dịch rollback.</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <div class="table-block">
+            <div class="section-title">
+                <h3>Lịch sử chuyến đi</h3>
+                <p>Xem chi tiết chuyến đã đặt và trạng thái xử lý.</p>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr><th>Mã</th><th>Đón</th><th>Đến</th><th>Giá</th><th>Thời gian</th><th>Trạng thái</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="h : ${history}">
+                        <td>
+                            <a class="text-link" th:href="@{/user/chuyen-di/{id}(id=${h.maChuyen})}" th:text="${h.maChuyen}">1</a>
+                        </td>
+                        <td th:text="${h.diemDon}">A</td>
+                        <td th:text="${h.diemDen}">B</td>
+                        <td th:text="${h.giaTien}">0</td>
+                        <td th:text="${#temporals.format(h.thoiGianDat, 'dd/MM/yyyy HH:mm')}">--</td>
+                        <td th:text="${h.trangThai}">--</td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(history)}"><td colspan="6" class="empty-state">Chưa có chuyến đi.</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const soKmInput = document.getElementById('soKm');
+        const calculatedPriceElement = document.getElementById('calculatedPrice');
+        const PRICE_PER_KM = 4500;
+
+        function updatePrice() {
+            const km = Number(soKmInput.value) || 1;
+            const total = km * PRICE_PER_KM;
+            calculatedPriceElement.textContent = new Intl.NumberFormat('vi-VN').format(total);
+        }
+
+        soKmInput.addEventListener('input', updatePrice);
+        updatePrice();
+    });
+</script>
 </body>
 </html>

@@ -1,0 +1,1 @@
+                    <button class="auth-btn secondary" type="submit" formaction="/user/chuyen-di/[[${trip.maChuyen}]]/huy" formmethod="post">H?y chuy?n</button>

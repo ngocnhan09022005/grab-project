@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard - Deadlock 1</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>.deadlock-banner{border:2px dashed #c00;padding:10px;margin-bottom:12px;background:#fff0f0}</style>
+</head>
+<body>
+<main class="page-container">
+    <section class="panel" style="max-width:960px;margin:28px auto;">
+        <div class="deadlock-banner">
+            <strong>Deadlock Test - User 1</strong>
+            <form method="post" action="/deadlock/user1/start-tx1" style="display:inline-block;margin-left:12px">
+                <input name="chuyenDiId" value="1" style="width:60px" />
+                <input name="taiXeId" value="1" style="width:60px" />
+                <button type="submit">Start TX1</button>
+            </form>
+        </div>
+
+        <!-- reuse user dashboard content -->
+        <div><div>
+        <h3 style="margin-top:18px;">Lịch sử chuyến đi</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr><th>Mã</th><th>Đón</th><th>Đến</th><th>Giá</th><th>Thời gian</th><th>Trạng thái</th></tr>
+                </thead>
+                <tbody>
+                
+                <tr><td colspan="6" class="empty-state">Chưa có chuyến đi.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        </div></div>
+    </section>
+</main>
+</body>
+</html>
+

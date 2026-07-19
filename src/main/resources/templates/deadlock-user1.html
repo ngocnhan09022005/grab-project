@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard - Deadlock 1</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>.deadlock-banner{border:2px dashed #c00;padding:10px;margin-bottom:12px;background:#fff0f0}</style>
+</head>
+<body>
+<main class="page-container">
+    <section class="panel" style="max-width:960px;margin:28px auto;">
+        <div class="deadlock-banner">
+            <strong>Deadlock Test - User 1</strong>
+            <form method="post" th:action="@{/deadlock/user1/start-tx1}" style="display:inline-block;margin-left:12px">
+                <input name="chuyenDiId" value="1" style="width:60px" />
+                <input name="taiXeId" value="1" style="width:60px" />
+                <button type="submit">Start TX1</button>
+            </form>
+        </div>
+
+        <!-- reuse user dashboard content -->
+        <!-- reuse user dashboard history -->
+        <div th:insert="~{user-dashboard :: userContent}"></div>
+    </section>
+</main>
+</body>
+</html>

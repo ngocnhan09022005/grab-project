@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Deadlock Simulator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        .box { border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem; }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+    <h1>Deadlock Simulator</h1>
+    <p>This page starts two transactions that lock resources in opposite order to simulate a deadlock.</p>
+
+    <div class="box">
+        <form method="post" th:action="@{/deadlock/start-tx1}">
+            <h3>Start Transaction 1 (lock CHUYEN_DI then TAI_XE)</h3>
+            <label>CHUYEN_DI id: <input name="chuyenDiId" value="1" /></label>
+            <label>TAI_XE id: <input name="taiXeId" value="1" /></label>
+            <button type="submit">Start TX1</button>
+        </form>
+    </div>
+
+    <div class="box">
+        <form method="post" th:action="@{/deadlock/start-tx2}">
+            <h3>Start Transaction 2 (lock TAI_XE then CHUYEN_DI)</h3>
+            <label>CHUYEN_DI id: <input name="chuyenDiId" value="1" /></label>
+            <label>TAI_XE id: <input name="taiXeId" value="1" /></label>
+            <button type="submit">Start TX2</button>
+        </form>
+    </div>
+
+    <div class="box">
+        <strong>Instructions:</strong>
+        <ol>
+            <li>Open two browser tabs to this page.</li>
+            <li>In tab A click "Start TX1".</li>
+            <li>Quickly in tab B click "Start TX2".</li>
+            <li>Observe application logs — InnoDB deadlock or waiting will appear in logs/console.</li>
+        </ol>
+    </div>
+
+    <div th:if="${msg}" class="box">Message: <span th:text="${msg}"></span></div>
+</body>
+</html>

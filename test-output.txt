@@ -1,0 +1,71 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by lombok.permit.Permit
+WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+18:00:29.128 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.grapapplication3.grab_backendapplication.controller.AuthControllerTest]: AuthControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:00:29.335 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.grapapplication3.grab_backendapplication.GrabBackendapplicationApplication for test class com.grapapplication3.grab_backendapplication.controller.AuthControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.4)
+
+2026-07-14T18:00:29.846+07:00  INFO 36500 --- [           main] c.g.g.controller.AuthControllerTest      : Starting AuthControllerTest using Java 25.0.2 with PID 36500 (started by nhan3 in d:\GRAB_PROJECT\grab-project)
+2026-07-14T18:00:29.847+07:00  INFO 36500 --- [           main] c.g.g.controller.AuthControllerTest      : No active profile set, falling back to 1 default profile: "default"
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\nhan3\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.6\byte-buddy-agent-1.17.6.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+2026-07-14T18:00:31.583+07:00  INFO 36500 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-07-14T18:00:32.189+07:00  INFO 36500 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-07-14T18:00:32.189+07:00  INFO 36500 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-07-14T18:00:32.196+07:00  INFO 36500 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 7 ms
+2026-07-14T18:00:32.258+07:00  INFO 36500 --- [           main] c.g.g.controller.AuthControllerTest      : Started AuthControllerTest in 2.836 seconds (process running for 4.016)
+2026-07-14T18:00:33.157+07:00  INFO 36500 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.grapapplication3.grab_backendapplication.GrabBackendapplicationApplicationTests]: GrabBackendapplicationApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-14T18:00:33.181+07:00  INFO 36500 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.grapapplication3.grab_backendapplication.GrabBackendapplicationApplication for test class com.grapapplication3.grab_backendapplication.GrabBackendapplicationApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.4)
+
+2026-07-14T18:00:33.300+07:00  INFO 36500 --- [           main] g.GrabBackendapplicationApplicationTests : Starting GrabBackendapplicationApplicationTests using Java 25.0.2 with PID 36500 (started by nhan3 in d:\GRAB_PROJECT\grab-project)
+2026-07-14T18:00:33.300+07:00  INFO 36500 --- [           main] g.GrabBackendapplicationApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2026-07-14T18:00:33.960+07:00  INFO 36500 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-14T18:00:34.141+07:00  INFO 36500 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 156 ms. Found 4 JPA repository interfaces.
+2026-07-14T18:00:34.919+07:00  INFO 36500 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-14T18:00:35.031+07:00  INFO 36500 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2026-07-14T18:00:35.103+07:00  INFO 36500 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-14T18:00:35.433+07:00  INFO 36500 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-14T18:00:35.495+07:00  INFO 36500 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-14T18:00:35.698+07:00  INFO 36500 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@47c422d3
+2026-07-14T18:00:35.701+07:00  INFO 36500 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-14T18:00:35.788+07:00  INFO 36500 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.46
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-14T18:00:37.129+07:00  INFO 36500 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-14T18:00:37.356+07:00  INFO 36500 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-14T18:00:37.884+07:00  INFO 36500 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-14T18:00:38.492+07:00  INFO 36500 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-07-14T18:00:38.836+07:00  INFO 36500 --- [           main] g.GrabBackendapplicationApplicationTests : Started GrabBackendapplicationApplicationTests in 5.62 seconds (process running for 10.597)
+DatabaseMigration: KHACH_HANG columns checked.
+Hibernate: 
+    select
+        count(*) 
+    from
+        KHACH_HANG kh1_0

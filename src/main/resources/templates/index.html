@@ -61,7 +61,7 @@
                             <td th:text="${kh.hoTen}">Nguyen Van A</td>
                             <td th:text="${kh.soDienThoai}">0123456789</td>
                             <td th:text="${kh.email}">user@example.com</td>
-                            <td th:text="${#dates.format(kh.ngayDangKy, 'dd/MM/yyyy')}">01/01/2024</td>
+                            <td th:text="${kh.ngayDangKy != null ? #temporals.format(kh.ngayDangKy.atStartOfDay(), 'dd/MM/yyyy') : '--'}">01/01/2024</td>
                         </tr>
                         <tr th:if="${#lists.isEmpty(khachHangs)}">
                             <td colspan="5" class="empty-state">Chưa có khách hàng nào trong hệ thống.</td>
